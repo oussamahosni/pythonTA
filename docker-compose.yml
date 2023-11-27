@@ -1,0 +1,20 @@
+version: '3'
+services: 
+  scraper_service:
+    build: .
+    container_name: "scraper_service"
+    ports: 
+        - "8000:8000"
+    shm_size: '2gb'
+    volumes: 
+        - ./app/:/app
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    container_name: "mongodb"
+    ports:
+    - "27017:27017"
+    volumes:
+    - ./data:/data/db
